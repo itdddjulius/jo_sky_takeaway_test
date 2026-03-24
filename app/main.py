@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, HTMLResponse
 from prometheus_client import CONTENT_TYPE_LATEST, Counter, Gauge, generate_latest
 from pythonjsonlogger import jsonlogger
 
@@ -28,6 +28,73 @@ alerts_processed_counter = Counter("alerts_processed_total", "Total alerts proce
 incidents_created_counter = Counter("incidents_created_total", "Total incidents created")
 suppressed_counter = Counter("suppressed_duplicates_total", "Suppressed duplicate alerts")
 suppression_rate_gauge = Gauge("suppression_rate", "Duplicate suppression rate")
+
+
+@app.get("/", response_class=HTMLResponse)
+def root():
+    summary = engine.metrics_summary().model_dump()
+    return f"""
+    <html>
+      <head>
+        <title>Alert Incident Service</title>
+        <style>
+          body {{
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #0f172a;
+            color: #e2e8f0;
+          }}
+          .card {{
+            background: #1e293b;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 860px;
+          }}
+          a {{
+            color: #38bdf8;
+            text-decoration: none;
+          }}
+          code {{
+            background: #334155;
+            padding: 3px 7px;
+            border-radius: 6px;
+          }}
+          ul {{
+            line-height: 1.8;
+          }}
+        </style>
+      </head>
+      <body>
+        <div class="card">
+          <h1>Alert Incident Service</h1>
+          <p>Service is running successfully.</p>
+
+          <h2>Quick Links</h2>
+          <ul>
+            <li><a href="/health">/health</a></li>
+            <li><a href="/incidents">/incidents</a></li>
+            <li><a href="/metrics/summary">/metrics/summary</a></li>
+            <li><a href="/metrics">/metrics</a></li>
+            <li><a href="/docs">/docs</a></li>
+          </ul>
+
+          <h2>Metrics Snapshot</h2>
+          <ul>
+            <li>alerts_received_total: {summary["alerts_received_total"]}</li>
+            <li>alerts_processed_total: {summary["alerts_processed_total"]}</li>
+            <li>incidents_created_total: {summary["incidents_created_total"]}</li>
+            <li>suppressed_duplicates_total: {summary["suppressed_duplicates_total"]}</li>
+            <li>suppression_rate: {summary["suppression_rate"]}</li>
+          </ul>
+
+          <h2>Example Commands</h2>
+          <p><code>curl -X POST http://localhost:8000/alerts/load-sample</code></p>
+          <p><code>curl http://localhost:8000/incidents</code></p>
+          <p><code>curl http://localhost:8000/metrics/summary</code></p>
+        </div>
+      </body>
+    </html>
+    """
 
 
 @app.get("/health")
