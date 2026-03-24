@@ -4,6 +4,56 @@ A small Python service that ingests alerts, suppresses duplicate noise,
 correlates related alerts into incidents, 
 and suggests a simple automated action when alert volume crosses a threshold.
 
+## REQUIREMENT - As Per Sky Takeaway Test
+Problem statement
+Build a small service that ingests system alerts and groups related alerts into incidents, with the aim of reducing noise and suggesting simple automated actions.
+
+Input
+Provide a JSON dataset containing alerts from multiple services. The dataset should include:
+
+Fields: timestamp, service, severity, message, host, region
+Duplicate alerts
+Slight variations in alert messages
+Cascading failures (one issue triggering multiple alerts)
+Some irrelevant or noisy alerts
+Requirements
+
+Alert correlation
+Group alerts into incidents. The candidate should define and explain their own correlation logic (for example, time windows, service grouping, message similarity).
+
+Noise reduction
+Deduplicate or suppress repeated alerts and demonstrate the impact (before and after).
+
+Automation rule
+Implement a simple rule, for example:
+“If more than X alerts from the same service occur within Y minutes, trigger an action.”
+The output should include a suggested action.
+
+Interface
+Provide a simple API or CLI to submit alerts and query incidents.
+
+Observability
+Expose basic metrics or logs (for example: alerts processed, incidents created, suppression rate).
+
+Mandatory design write‑up
+Please include a short document covering:
+
+Correlation approach and rationale
+Trade‑offs made
+Limitations
+How the system would scale
+How the solution could evolve using AI/ML
+Time expectation
+The completed task should be returned by email at least 24 hours before the follow‑up interview is scheduled.
+
+We will  schedule a  45‑minute follow‑up session, where the candidate is expected to:
+Walk through their solution
+Answer questions on their design and implementation choices
+Whiteboard parts of the solution if requested
+The follow up session will be on :
+
+Thursday 2 April: 09:30 am
+
 ## 1. What this solution does
 
 This solution implements all requested areas:
