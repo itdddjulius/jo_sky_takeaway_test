@@ -142,11 +142,11 @@ Alerts are correlated into the same incident when all of the following are true:
    - high message similarity (`SequenceMatcher >= 0.72`)
    - shared failure pattern (for example, database-related alerts)
 
-### Message normalization
+### Message normalisation
 
 Before matching, alert messages are normalized to reduce meaningless differences.
 
-The normalizer removes or standardizes:
+The normaliser removes:
 
 - numeric IDs
 - timing values such as `3000ms`
@@ -180,7 +180,7 @@ Fingerprint fields:
 - service
 - region
 - host
-- normalized message
+- normalised message
 - severity
 
 ### Concise example
@@ -395,7 +395,7 @@ The engine sorts alerts by timestamp.
 ### Step 3
 For each alert:
 
-- compute normalized message
+- compute normalised message
 - compute fingerprint
 - suppress if duplicate
 - otherwise attempt to correlate into an existing incident
