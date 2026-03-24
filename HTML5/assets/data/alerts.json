@@ -1,0 +1,24 @@
+{
+  "alerts": [
+    {"timestamp": "2026-03-24T10:00:00Z", "service": "payments", "severity": "critical", "message": "Database connection timeout after 3000ms on host pay-01", "host": "pay-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:01:00Z", "service": "payments", "severity": "critical", "message": "Database timed out after 3050ms on host pay-01", "host": "pay-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:01:30Z", "service": "payments", "severity": "critical", "message": "Database connection timeout after 3000ms on host pay-01", "host": "pay-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:02:00Z", "service": "checkout", "severity": "high", "message": "Payment authorization failed due to upstream database timeout", "host": "chk-02", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:02:30Z", "service": "checkout", "severity": "warning", "message": "Retry spike detected in checkout worker for payment calls", "host": "chk-03", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:03:00Z", "service": "payments", "severity": "critical", "message": "DB connection refused on host pay-02", "host": "pay-02", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:03:30Z", "service": "inventory", "severity": "info", "message": "Nightly stock refresh completed successfully", "host": "inv-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:04:00Z", "service": "payments", "severity": "critical", "message": "Database connection timeout after 2800ms on host pay-03", "host": "pay-03", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:04:30Z", "service": "payments", "severity": "critical", "message": "Database connection timeout after 2800ms on host pay-03", "host": "pay-03", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:05:00Z", "service": "search", "severity": "warning", "message": "CPU usage 91 percent on search-01", "host": "search-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:05:30Z", "service": "search", "severity": "warning", "message": "CPU usage 92 percent on search-01", "host": "search-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:06:00Z", "service": "search", "severity": "warning", "message": "CPU usage 93 percent on search-01", "host": "search-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:06:30Z", "service": "search", "severity": "warning", "message": "CPU usage 94 percent on search-01", "host": "search-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:07:00Z", "service": "search", "severity": "warning", "message": "CPU usage 95 percent on search-01", "host": "search-01", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:09:00Z", "service": "notifications", "severity": "warning", "message": "SMS provider latency elevated", "host": "not-01", "region": "eu-west-1"},
+    {"timestamp": "2026-03-24T10:10:00Z", "service": "checkout", "severity": "high", "message": "Cart submission failed after payment dependency outage", "host": "chk-02", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:10:30Z", "service": "payments", "severity": "critical", "message": "Database connection timeout after 3200ms on host pay-04", "host": "pay-04", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:12:00Z", "service": "payments", "severity": "critical", "message": "Database connection timeout after 3200ms on host pay-04", "host": "pay-04", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:15:00Z", "service": "inventory", "severity": "warning", "message": "Disk usage 81 percent on inv-02", "host": "inv-02", "region": "eu-west-2"},
+    {"timestamp": "2026-03-24T10:16:00Z", "service": "inventory", "severity": "warning", "message": "Disk usage 82 percent on inv-02", "host": "inv-02", "region": "eu-west-2"}
+  ]
+}

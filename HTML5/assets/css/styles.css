@@ -1,0 +1,6 @@
+/* Small custom styles to complement Tailwind/Bootstrap */
+body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+#alertsContainer .alert-card { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+#alertsContainer .alert-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(15,23,42,0.08); }
+.badge-severity { font-weight: 600; }
+.small-muted { font-size: 0.85rem; color: #6b7280; }
