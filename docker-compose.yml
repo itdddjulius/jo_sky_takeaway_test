@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  alert-service:
+    build: .
+    container_name: alert-incident-service
+    ports:
+      - "8000:8000"
+    environment:
+      CORRELATION_WINDOW_MINUTES: "10"
+      DEDUP_WINDOW_MINUTES: "5"
+      AUTOMATION_THRESHOLD_X: "4"
+      AUTOMATION_WINDOW_Y_MINUTES: "10"
+      LOG_LEVEL: "INFO"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped
