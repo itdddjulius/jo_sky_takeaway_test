@@ -33,6 +33,7 @@ suppression_rate_gauge = Gauge("suppression_rate", "Duplicate suppression rate")
 @app.get("/", response_class=HTMLResponse)
 def root():
     summary = engine.metrics_summary().model_dump()
+
     return f"""
     <html>
       <head>
@@ -48,22 +49,35 @@ def root():
             background: #1e293b;
             padding: 24px;
             border-radius: 12px;
-            max-width: 860px;
+            max-width: 900px;
           }}
           a {{
             color: #38bdf8;
             text-decoration: none;
           }}
-          code {{
-            background: #334155;
-            padding: 3px 7px;
-            border-radius: 6px;
+          button {{
+            padding: 10px 16px;
+            margin: 6px;
+            border-radius: 8px;
+            border: none;
+            background: #22c55e;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
           }}
-          ul {{
-            line-height: 1.8;
+          button:hover {{
+            background: #4ade80;
+          }}
+          pre {{
+            background: #020617;
+            padding: 12px;
+            border-radius: 8px;
+            max-height: 300px;
+            overflow: auto;
           }}
         </style>
       </head>
+
       <body>
         <div class="card">
           <h1>Alert Incident Service</h1>
@@ -87,11 +101,54 @@ def root():
             <li>suppression_rate: {summary["suppression_rate"]}</li>
           </ul>
 
-          <h2>Example Commands</h2>
-          <p><code>curl -X POST http://localhost:8000/alerts/load-sample</code></p>
-          <p><code>curl http://localhost:8000/incidents</code></p>
-          <p><code>curl http://localhost:8000/metrics/summary</code></p>
+          <h2>Actions</h2>
+          <button onclick="loadSample()">LOAD-SAMPLE</button>
+          <button onclick="getIncidents()">INCIDENTS</button>
+          <button onclick="getSummary()">SUMMARY</button>
+          <button onclick="window.location.href='/docs'">DOCS</button>
+
+          <h2>Response</h2>
+          <pre id="output">Click a button to execute...</pre>
         </div>
+
+        <script>
+          async function loadSample() {{
+            setOutput("Loading sample alerts...");
+            try {{
+              const res = await fetch('/alerts/load-sample', {{ method: 'POST' }});
+              const data = await res.json();
+              setOutput(JSON.stringify(data, null, 2));
+            }} catch (err) {{
+              setOutput("Error: " + err);
+            }}
+          }}
+
+          async function getIncidents() {{
+            setOutput("Fetching incidents...");
+            try {{
+              const res = await fetch('/incidents');
+              const data = await res.json();
+              setOutput(JSON.stringify(data, null, 2));
+            }} catch (err) {{
+              setOutput("Error: " + err);
+            }}
+          }}
+
+          async function getSummary() {{
+            setOutput("Fetching summary...");
+            try {{
+              const res = await fetch('/metrics/summary');
+              const data = await res.json();
+              setOutput(JSON.stringify(data, null, 2));
+            }} catch (err) {{
+              setOutput("Error: " + err);
+            }}
+          }}
+
+          function setOutput(text) {{
+            document.getElementById("output").textContent = text;
+          }}
+        </script>
       </body>
     </html>
     """
